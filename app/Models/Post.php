@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\File;
 
 class Post {
 
@@ -14,5 +15,12 @@ class Post {
         return cache()->remember("posts.{$slug}", 1200, function () use($path) { 
             file_get_contents($path);
         });
+    }
+
+    public static function all(){
+        $files = File::files(resource_path("posts\\"));
+        return array_map(function ($file) {
+            return $file->getContents();
+        }, $files);
     }
 }

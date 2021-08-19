@@ -23,7 +23,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/posts', function (){
-    return view('posts');
+    return view('posts',[
+        'posts' => Post::all()
+    ]);
 });
 Route::get('/posts/{post}', function($slug){
     //Find a post by its slug and then pass it to a view called "post"
