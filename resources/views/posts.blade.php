@@ -8,21 +8,10 @@
     <link rel="stylesheet" href="/app.css">
 </head>
 <body>
-    <article>
-        <h1 style="font-size: 50px;"><a href="/posts/my-first-post">My first post</a></h1>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam at porro ducimus sunt eos id numquam illo! Doloribus molestiae animi necessitatibus illum enim hic, amet molestias esse id temporibus. Amet?</p>
-    </article>
-    <article>
-        <h1 style="font-size: 50px;"><a href="/post/my-second-post">My second post</a></h1>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam at porro ducimus sunt eos id numquam illo! Doloribus molestiae animi necessitatibus illum enim hic, amet molestias esse id temporibus. Amet?</p>
-    </article>
-    <article>
-        <h1 style="font-size: 50px;"><a href="/post/my-third-post">My third post</a></h1>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam at porro ducimus sunt eos id numquam illo! Doloribus molestiae animi necessitatibus illum enim hic, amet molestias esse id temporibus. Amet?</p>
-    </article>
-    
+    <?php foreach($posts as $post) : ?>
+        <article>
+            <?= $post; ?>
+        </article>
+    <?php endforeach; ?>
 </body>
 </html>
