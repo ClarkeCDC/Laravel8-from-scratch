@@ -25,15 +25,19 @@ Route::get('/posts', function (){
     return view('posts');
 });
 Route::get('/posts/{post}', function($slug){
-    $path = "resources\posts\\".$slug.".html";
-    $post = base_path($path);
-    if (!file_exists($post)){
+    if (!file_exists($path = base_path("resources\posts\\".$slug.".html"))){
         //ddd("File does not exist");
         //abort(404);
         return redirect("/posts");
     }
+
+    
+    $post = cache()->remember("posts.{$slug}", 1200, function () use($path) { // use (path) passes through variable so it accesiblle
+        return file_get_contents($path);
+    });
+    
     return view('post', [
-        'post' => file_get_contents($post)
+        'post' => $post
     ]);
 })->where('post','[A-z_\-]+');
 require __DIR__.'/auth.php';
