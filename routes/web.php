@@ -29,8 +29,8 @@ Route::get('/posts', function () {
 Route::get('/posts/{post}', function ($slug) {
     //Find a post by its slug and then pass it to a view called "post"
     return view('post', [
-        'post' => Post::find($slug)
+        'post' => Post::findOrFail($slug)
     ]);
-})->where('post', '[A-z_\-]+');
+});
 
 require __DIR__ . '/auth.php';

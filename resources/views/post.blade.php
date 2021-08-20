@@ -1,6 +1,4 @@
-@extends('components.layout')
-
-@section('content')
+<x-layout>
     <article>
         <h1>{{$post->title}}</h1>
         <div>
@@ -8,4 +6,4 @@
         </div>
     </article>
     <a href="/posts">Go back</a>
-@endsection
+</x-layout>
