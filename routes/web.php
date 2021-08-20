@@ -2,7 +2,8 @@
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
-
+use Spatie\YamlFrontMatter\YamlFrontMatter;
+use Illuminate\Support\Facades\File;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,16 +23,21 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/posts', function (){
-    return view('posts',[
-        'posts' => Post::all()
-    ]);
+Route::get('/posts', function () {
+    $files = File::files(resource_path("posts\\"));
+    $documents = [];
+    foreach ($files as $file){
+        $document[] = YamlFrontMatter::parseFile($file);
+    }
+    // return view('posts',[
+    //     'posts' => Post::all()
+    // ]);
 });
-Route::get('/posts/{post}', function($slug){
+Route::get('/posts/{post}', function ($slug) {
     //Find a post by its slug and then pass it to a view called "post"
     return view('post', [
         'post' => Post::find($slug)
     ]);
 })->where('post', '[A-z_\-]+');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
