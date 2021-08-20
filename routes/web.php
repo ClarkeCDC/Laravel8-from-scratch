@@ -17,10 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 Route::get('/posts', function () {
     return view ('posts', [
         'posts' => Post::all()
@@ -33,4 +29,3 @@ Route::get('/posts/{post}', function ($slug) {
     ]);
 });
 
-require __DIR__ . '/auth.php';
