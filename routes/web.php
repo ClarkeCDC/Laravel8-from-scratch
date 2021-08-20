@@ -25,13 +25,20 @@ Route::get('/dashboard', function () {
 
 Route::get('/posts', function () {
     $files = File::files(resource_path("posts\\"));
-    $documents = [];
+    $posts = [];
     foreach ($files as $file){
-        $document[] = YamlFrontMatter::parseFile($file);
+        $document = YamlFrontMatter::parseFile($file);
+        $posts[] = new Post(
+            $document->title,
+            $document->excerpt,
+            $document->date,
+            $document->body(),
+            $document->slug
+        );
     }
-    // return view('posts',[
-    //     'posts' => Post::all()
-    // ]);
+    return view ('posts', [
+        'posts' => $posts
+    ]);
 });
 Route::get('/posts/{post}', function ($slug) {
     //Find a post by its slug and then pass it to a view called "post"
