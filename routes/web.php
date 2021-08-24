@@ -22,10 +22,10 @@ Route::get('/posts', function () {
         'posts' => Post::all()
     ]);
 });
-Route::get('/posts/{post}', function ($id) {
+Route::get('/posts/{post:slug}', function (Post $post) { //Post::where('slug', $post)->firstOrFail();
     //Find a post by its slug and then pass it to a view called "post"
     return view('post', [
-        'post' => Post::findOrFail($id)
+        'post' => $post
     ]);
 });
 
