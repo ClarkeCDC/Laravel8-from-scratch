@@ -10,5 +10,11 @@ class Post extends Model
     use HasFactory;
 
     //protected $guarded = ['id']; stops mass migration vulnerability
-    protected $fillable = ['title','excerpt','body'];
+    protected $fillable = ['title','excerpt','body','category_id','slug'];
+
+    public function category(){
+        //hasOne, hasMany, belongsTo, belongsToMany
+        return $this->belongsTo(Category::class);
+    }
+
 }
