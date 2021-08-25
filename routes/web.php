@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/posts', function () {
     return view ('posts', [
-        'posts' => Post::all()
+        'posts' => Post::with('category')->get()
     ]);
 });
 Route::get('/posts/{post:slug}', function (Post $post) { //Post::where('slug', $post)->firstOrFail();
